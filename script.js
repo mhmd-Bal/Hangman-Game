@@ -23,3 +23,11 @@ let Words = {
     ],
 }
 
+const lang = document.getElementsByClassName("Word_button");
+// console.log(lang[1]);
+
+for (let i=0; i < lang.length; i++){
+    lang[i].addEventListener("click", function(e){
+        console.log(this.innerHTML);
+    });
+}
