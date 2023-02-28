@@ -1,4 +1,4 @@
-let Words = {
+let words = {
     Languages: [
         "javascript",
         "python",
@@ -22,12 +22,21 @@ let Words = {
         "france",
     ],
 }
+const word_options = document.getElementsByClassName("Word_button");
+let option = '';
+let word_to_guess = '';
+let guessed_letters = [];
+let game_started = false;
 
-const lang = document.getElementsByClassName("Word_button");
-// console.log(lang[1]);
+// Start game
 
-for (let i=0; i < lang.length; i++){
-    lang[i].addEventListener("click", function(e){
-        console.log(this.innerHTML);
+for (let i=0; i < word_options.length; i++){
+    word_options[i].addEventListener("click", () => {
+        if(!game_started){
+            option = word_options[i].textContent;
+            game_started = true;
+            console.log(option);
+        }
     });
 }
+
