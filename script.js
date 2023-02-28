@@ -28,7 +28,7 @@ const printed_word_to_guess = document.getElementById("Word_to_guess");
 const keyboard_keys = document.getElementsByClassName("Key");
 let option = '';
 let word_to_guess = '';
-let guessed_letters = [" "];
+let guessed_letters = [];
 let game_started = false;
 let lives = 6;
 
@@ -62,17 +62,16 @@ const generateRandomWord = () => {
 }
 word_to_guess = word_to_guess.split("");
 
-const printGeneratedWord = (guessed_letters) => {
-    // for (i=0; i < word_to_guess.length; i++){
-    //     printed_word_to_guess.textContent += "_ ";
-    // }
-    printed_word_to_guess.textContent = " ";
+const printGeneratedWord = () => {
+    printed_word_to_guess.textContent = "";
     if(game_started){
         for (let i=0; i < word_to_guess.length; i++){
-            if(guessed_letters.indexOf(word_to_guess[i]) >= 0){
+            let letter = word_to_guess[i];
+            if(guessed_letters.indexOf(letter) >= 0){
                 for(let j=0; j < guessed_letters.length; i++){
-                    if(word_to_guess[i] == guessed_letters[j]){
-                        printed_word_to_guess.textContent += letter_to_check;
+                    if(letter == guessed_letters[j]){
+                        printed_word_to_guess.textContent += letter;
+                        break;
                     }
                 }
             }else{
@@ -104,7 +103,7 @@ const checkLetterInWord = (Letter) => {
         if(guessed_letters.indexOf(Letter) == -1){
             guessed_letters.push(Letter);
             console.log(guessed_letters);
-        // printGeneratedWord(guessed_letters);
+        printGeneratedWord();
         }
     }
 }
