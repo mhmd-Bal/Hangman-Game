@@ -28,7 +28,6 @@ const printed_word_to_guess = document.getElementById("Word_to_guess");
 const keyboard_keys = document.getElementsByClassName("Key");
 let option = '';
 let word_to_guess = '';
-let key = '';
 let guessed_letters = [];
 let game_started = false;
 
@@ -67,5 +66,15 @@ const printGeneratedWord = () => {
     for (i=0; i < word_to_guess.length; i++){
         printed_word_to_guess.textContent += "_ ";
     }
+}
+
+for (let i=0; i < keyboard_keys.length; i++) {
+    keyboard_keys[i].addEventListener("click", () => {
+        if(game_started){
+            let key = '';
+            key = keyboard_keys[i].innerText;
+            checkKeyInWord(key)
+        }
+    });
 }
 
