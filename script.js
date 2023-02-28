@@ -36,13 +36,13 @@ let is_in_word = false;
 
 // Start game
 
-// console.log(words.Languages)
 
 for (let i=0; i < word_options.length; i++){
     word_options[i].addEventListener("click", () => {
         if(!game_started){
             option = word_options[i].textContent;
             word_to_guess = generateRandomWord();
+            word_options[i].classList.add("Disabled");
             console.log(word_to_guess);
             printGeneratedWord();
         }
@@ -86,6 +86,7 @@ const printGeneratedWord = () => {
     
         }
     }else{
+        printed_word_to_guess.textContent = "";
         for (let i=0; i < word_to_guess.length; i++){
             printed_word_to_guess.textContent += "_ ";
             game_started = true;
@@ -137,7 +138,28 @@ const checkIfAlive = () => {
         hangedman.src = "Images/5.jpg";
     }else if(lives == 0){
         hangedman.src = "Images/6.jpg";
-        alert("YOU LOSE!");
-        game_started = false;
+        gameLost();
+        setTimeout(() => {
+            gameReset(); 
+         }, 3000);
     }
+}
+
+const gameLost= () => {
+    printed_word_to_guess.textContent = "YOU LOST!";
+}
+
+
+const gameReset = () => {
+    for (let i=0; i < keyboard_keys.length; i++){
+        keyboard_keys[i].classList.remove("Disabled");
+    }
+    for (let j=0; j < word_options.length; j++){
+        word_options[j].classList.remove("Disabled");
+    }
+    game_started = false;
+    lives = 6;
+    hangedman.src = "Images/0.jpg";
+    guessed_letters = [];
+    printed_word_to_guess.textContent = "";
 }
