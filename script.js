@@ -24,8 +24,11 @@ let words = {
     ],
 }
 const word_options = document.getElementsByClassName("Word_button");
+const printed_word_to_guess = document.getElementById("Word_to_guess");
+const keyboard_keys = document.getElementsByClassName("Key");
 let option = '';
 let word_to_guess = '';
+let key = '';
 let guessed_letters = [];
 let game_started = false;
 
@@ -40,6 +43,7 @@ for (let i=0; i < word_options.length; i++){
             game_started = true;
             word_to_guess = generateRandomWord();
             console.log(word_to_guess);
+            printGeneratedWord();
         }
     });
 }
@@ -56,5 +60,12 @@ const generateRandomWord = () => {
         return words.Countries[Math.floor(Math.random() * words.Countries.length)];
     }
 
+}
+
+const printGeneratedWord = () => {
+    word_to_guess = word_to_guess.split("");
+    for (i=0; i < word_to_guess.length; i++){
+        printed_word_to_guess.textContent += "_ ";
+    }
 }
 
