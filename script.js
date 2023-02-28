@@ -43,7 +43,6 @@ for (let i=0; i < word_options.length; i++){
             option = word_options[i].textContent;
             word_to_guess = generateRandomWord();
             word_options[i].classList.add("Disabled");
-            console.log(word_to_guess);
             printGeneratedWord();
         }
     });
@@ -69,14 +68,10 @@ const printGeneratedWord = () => {
         printed_word_to_guess.textContent = "";
         for (let i=0; i < word_to_guess.length; i++){
             let letter = word_to_guess[i];
-            console.log("hello im in the first loop");
             if(guessed_letters.indexOf(letter) >= 0){
-                console.log("hello im in the first loop if statement");
                 for(let j=0; j < guessed_letters.length; j++){
-                    console.log("hello im in the second loop");
                     if(letter == guessed_letters[j]){
                         printed_word_to_guess.textContent += letter;
-                        console.log("hello im in the second loop if statement");
                         break;
                     }
                 }
@@ -101,9 +96,7 @@ for (let i=0; i < keyboard_keys.length; i++) {
             let Letter = '';
             Letter = keyboard_keys[i].innerText;
             checkLetterInWord(Letter)
-
             keyboard_keys[i].classList.add("Disabled");
-
         }
     });
 }
@@ -112,9 +105,16 @@ const checkLetterInWord = (Letter) => {
     if (word_to_guess.indexOf(Letter) >= 0){
         if(guessed_letters.indexOf(Letter) == -1){
             guessed_letters.push(Letter);
-            console.log(guessed_letters);
             printGeneratedWord();
             is_in_word = true;
+            if(gameIsWon()){
+                setTimeout(() => {
+                    printed_word_to_guess.textContent = "YOU WON!";; 
+                }, 500);
+                setTimeout(() => {
+                    gameReset(); 
+                }, 3000);
+            }
         }
     }else{
         is_in_word = false;
@@ -141,8 +141,22 @@ const checkIfAlive = () => {
         gameLost();
         setTimeout(() => {
             gameReset(); 
-         }, 3000);
+        }, 3000);
     }
+}
+
+const gameIsWon = () => {
+    let won = true
+    for (let i=0; i < word_to_guess.length; i++){
+        let letter = word_to_guess[i];
+        if(guessed_letters.indexOf(letter) >= 0){
+            continue;
+        }else{
+            won = false;
+            break;
+        }
+    }
+    return won;
 }
 
 const gameLost= () => {
