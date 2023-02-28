@@ -31,6 +31,7 @@ let word_to_guess = '';
 let guessed_letters = [];
 let game_started = false;
 let lives = 6;
+let is_in_word = false;
 
 // Start game
 
@@ -98,6 +99,9 @@ for (let i=0; i < keyboard_keys.length; i++) {
             let Letter = '';
             Letter = keyboard_keys[i].innerText;
             checkLetterInWord(Letter)
+
+            keyboard_keys[i].classList.add("Disabled");
+
         }
     });
 }
@@ -108,6 +112,13 @@ const checkLetterInWord = (Letter) => {
             guessed_letters.push(Letter);
             console.log(guessed_letters);
             printGeneratedWord();
+            is_in_word = true;
+        }
+    }else{
+        is_in_word = false;
+        if(guessed_letters.indexOf(Letter) == -1){
+            lives -= 1;
+            console.log(lives);
         }
     }
 }
