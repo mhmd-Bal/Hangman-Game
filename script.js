@@ -63,14 +63,18 @@ const generateRandomWord = () => {
 word_to_guess = word_to_guess.split("");
 
 const printGeneratedWord = () => {
-    printed_word_to_guess.textContent = "";
     if(game_started){
+        printed_word_to_guess.textContent = "";
         for (let i=0; i < word_to_guess.length; i++){
             let letter = word_to_guess[i];
+            console.log("hello im in the first loop");
             if(guessed_letters.indexOf(letter) >= 0){
-                for(let j=0; j < guessed_letters.length; i++){
+                console.log("hello im in the first loop if statement");
+                for(let j=0; j < guessed_letters.length; j++){
+                    console.log("hello im in the second loop");
                     if(letter == guessed_letters[j]){
                         printed_word_to_guess.textContent += letter;
+                        console.log("hello im in the second loop if statement");
                         break;
                     }
                 }
@@ -103,7 +107,7 @@ const checkLetterInWord = (Letter) => {
         if(guessed_letters.indexOf(Letter) == -1){
             guessed_letters.push(Letter);
             console.log(guessed_letters);
-        printGeneratedWord();
+            printGeneratedWord();
         }
     }
 }
