@@ -12,6 +12,7 @@ let words = {
         "pizza",
         "taco",
         "donuts",
+        "shawarma",
     ],
 
     Countries: [
@@ -30,13 +31,30 @@ let game_started = false;
 
 // Start game
 
+// console.log(words.Languages)
+
 for (let i=0; i < word_options.length; i++){
     word_options[i].addEventListener("click", () => {
         if(!game_started){
             option = word_options[i].textContent;
             game_started = true;
-            console.log(option);
+            word_to_guess = generateRandomWord();
+            console.log(word_to_guess);
         }
     });
+}
+
+const generateRandomWord = () => {
+
+    if ( option == "Languages"){
+        return words.Languages[Math.floor(Math.random() * words.Languages.length)];
+    }
+    if( option == "Food"){
+        return words.Food[Math.floor(Math.random() * words.Food.length)];
+    }
+    if( option == "Countries"){
+        return words.Countries[Math.floor(Math.random() * words.Countries.length)];
+    }
+
 }
 
