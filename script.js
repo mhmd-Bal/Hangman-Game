@@ -26,6 +26,7 @@ let words = {
 const word_options = document.getElementsByClassName("Word_button");
 const printed_word_to_guess = document.getElementById("Word_to_guess");
 const keyboard_keys = document.getElementsByClassName("Key");
+const hangedman = document.getElementById("Hangedman");
 let option = '';
 let word_to_guess = '';
 let guessed_letters = [];
@@ -118,7 +119,25 @@ const checkLetterInWord = (Letter) => {
         is_in_word = false;
         if(guessed_letters.indexOf(Letter) == -1){
             lives -= 1;
-            console.log(lives);
+            checkIfAlive();
         }
+    }
+}
+
+const checkIfAlive = () => {
+    if(lives == 5){
+        hangedman.src = "Images/1.jpg";
+    }else if(lives == 4){
+        hangedman.src = "Images/2.jpg";
+    }else if(lives == 3){
+        hangedman.src = "Images/3.jpg";
+    }else if(lives == 2){
+        hangedman.src = "Images/4.jpg";
+    }else if(lives == 1){
+        hangedman.src = "Images/5.jpg";
+    }else if(lives == 0){
+        hangedman.src = "Images/6.jpg";
+        alert("YOU LOSE!");
+        game_started = false;
     }
 }
