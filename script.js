@@ -94,14 +94,15 @@ for (let i=0; i < keyboard_keys.length; i++) {
     keyboard_keys[i].addEventListener("click", () => {
         if(game_started){
             let Letter = '';
+            let keyboard_key = keyboard_keys[i];
             Letter = keyboard_keys[i].innerText;
-            checkLetterInWord(Letter)
+            checkLetterInWord(Letter, keyboard_key);
             keyboard_keys[i].classList.add("Disabled");
         }
     });
 }
 
-const checkLetterInWord = (Letter) => {
+const checkLetterInWord = (Letter, keyboard_key) => {
     if (word_to_guess.indexOf(Letter) >= 0){
         if(guessed_letters.indexOf(Letter) == -1){
             guessed_letters.push(Letter);
@@ -118,9 +119,11 @@ const checkLetterInWord = (Letter) => {
         }
     }else{
         is_in_word = false;
-        if(guessed_letters.indexOf(Letter) == -1){
-            lives -= 1;
-            checkIfAlive();
+        if(!keyboard_key.classList.contains("Disabled")){
+            if(guessed_letters.indexOf(Letter) == -1){
+                lives -= 1;
+                checkIfAlive();
+            }
         }
     }
 }
